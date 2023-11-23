@@ -1,0 +1,64 @@
+<h1>Breadcrump e</h1>
+<div class="card flex justify-content-center">
+  <p-breadcrumb class="max-w-full" [model]="items" [home]="home"></p-breadcrumb>
+</div>
+<h1>ContextMenu</h1>
+<div class="card flex justify-content-center">
+  <img #img src="https://primefaces.org/cdn/primeng/images/demo/nature/nature3.jpg" alt="Logo" aria-haspopup="true" class="max-w-full">
+  <p-contextMenu [target]="img" [model]="items"></p-contextMenu>
+</div>
+<h1>Dock</h1>
+
+<div class="card">
+  <div class="flex flex-wrap gap-3 mb-5">
+      <p-radioButton *ngFor="let option of positionOptions" 
+      [name]="option.label" [value]="option.value" [label]="option.label" [(ngModel)]="position" [inputId]="label">
+  </p-radioButton>
+  </div>
+  <div class="dock-window">
+      <p-dock [model]="items2" [position]="position">
+          <ng-template pTemplate="item" let-item>
+              <img [src]="item.icon" [alt]="item.label" width="100%" />
+          </ng-template>
+      </p-dock>
+  </div>
+</div>
+<h1>sidebar</h1>
+
+<div class="card flex justify-content-center example">
+  <p-sidebar [(visible)]="sidebarVisible">
+      <h3>Sidebar</h3>
+
+    <p-dropdown [options]="cities" [(ngModel)]="selectedCity" optionLabel="name" [showClear]="true" placeholder="Select a City"></p-dropdown>
+  
+  </p-sidebar>
+  <p-button (click)="sidebarVisible = true" icon="pi pi-arrow-right"></p-button>
+</div>
+
+<h1>reactive forms</h1>
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div>
+    <label for="firstName">First Name:</label>
+    <p-inputText id="firstName" formControlName="firstName"></p-inputText>
+    <p-message severity="error" *ngIf="form.get('firstName').hasError('required') && form.get('firstName').touched"
+      text="First name is required.">
+    </p-message>
+  </div>
+
+  <div>
+    <label for="lastName">Last Name:</label>
+    <p-inputText id="lastName" formControlName="lastName"></p-inputText>
+    <p-message severity="error" *ngIf="form.get('lastName').hasError('required') && form.get('lastName').touched"
+      text="Last name is required."></p-message>
+  </div>
+
+  <div>
+    <button type="submit" pButton label="Submit" [disabled]="!form.valid"></button>
+  </div>
+</form>
+
+
+
+
+
+<router-outlet></router-outlet>
